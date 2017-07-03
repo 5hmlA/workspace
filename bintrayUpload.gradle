@@ -1,11 +1,19 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-//A TabLayout that supports prompt information Library for Android
-// 这个version是区分library版本的，因此当我们需要更新library时记得修改这个version
-version = "1.1.1"
-def siteUrl = 'https://github.com/ZuYun/JPagerSlidingTabStrip'      // 项目的主页
-def gitUrl = 'https://github.com/ZuYun/JPagerSlidingTabStrip.git'   // Git仓库的url
-group = "com.yun.ospl"   // Maven Group ID for the artifact，一般填你唯一的包名
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+def siteUrl = properties.getProperty("bintray.siteUrl")    // 项目的主页
+def gitUrl = properties.getProperty("bintray.gitUrl")   // Git仓库的url
+def desc = properties.getProperty("bintray.desc")   //项目描述
+def devid = properties.getProperty("bintray.devid")   //开发者信息
+def devname = properties.getProperty("bintray.devname")   //开发者信息
+def devemail = properties.getProperty("bintray.devemail")   //开发者信息
+def jprojectName = properties.getProperty("bintray.jprojectName")   //发布到maven仓库上的项目名字
+version = properties.getProperty("bintray.version")    // Maven Group ID for the artifact，一般填你唯一的包名
+group = properties.getProperty("bintray.group")    // Maven Group ID for the artifact，一般填你唯一的包名
+
 install {
     repositories.mavenInstaller {
         //This generates POM.xml with proper parameters
@@ -13,7 +21,8 @@ install {
             project {
                 packaging 'aar'
                 //添加项目描述
-                name 'A TabLayout for Android'
+                name desc
+				description desc
                 url siteUrl
                 //Set your license
                 licenses {
@@ -24,9 +33,9 @@ install {
                 }
                 developers {
                     developer {
-                        id 'jonas-j'        //填写的一些基本信息
-                        name 'jonas-j'
-                        email 'jonas-j@outlook.com'
+                        id devid       //填写的一些基本信息
+                        name devname
+                        email devemail
                     }
                 }
                 scm {
@@ -38,29 +47,29 @@ install {
         }
     }
 }
+
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
 }
+
 artifacts {
     archives sourcesJar
 }
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
-        repo = "maven"
-        name = "JTabStrip"    //发布到JCenter上的项目名字
+        repo = "maven"  //发布到Bintray的那个仓库里，默认账户有四个库，我们这里上传到maven库
+        name = jprojectName   //发布到JCenter上的项目名字
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
         publish = true
     }
 }
-
 
 //1    第一步是检查代码的正确性，以及编译library文件（aar，pom等等），输入下面的命令：
 //      gradlew install
