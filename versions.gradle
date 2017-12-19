@@ -33,8 +33,9 @@ versions.constraint = "1.0.2"
 
 versions.jstatelayout="0.1.13"
 versions.jtabstrip="1.6.8-beta@aar"
-versions.bindingcollectionadapter="1.0.0"
+versions.bindingcollectionadapter="1.0.1"
 versions.bindingstar="0.1.14"
+versions.bindPagelist="0.1.15"
 
 def deps = [:]
 
@@ -131,6 +132,7 @@ deps.jstatelayout = "com.yun.ospl:JstateLayout:$versions.jstatelayout"
 deps.jtabstrip = "com.yun.ospl:jtabstrip:$versions.jtabstrip"
 deps.bindingcollectionadapter = "com.yun.ospl:bindingcollectionadapter:$versions.bindingcollectionadapter"
 deps.bindingstar = "com.yun.ospl:bindingstar:$versions.bindingstar"
+deps.bindPagelist = "com.yun.ospl:easybindpagelist:$versions.bindPagelist"
 
 ext.deps = deps
 
