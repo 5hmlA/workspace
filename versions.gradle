@@ -31,7 +31,7 @@ versions.kotlin = "1.2.0"
 versions.paging = "1.0.0-alpha3"
 versions.constraint = "1.0.2"
 
-versions.jstatelayout="1.7.0-visi"
+versions.jstatelayout="0.1.13"
 versions.jtabstrip="1.6.8-beta@aar"
 versions.bindingcollectionadapter="1.0.0"
 versions.bindingstar="0.1.14"
