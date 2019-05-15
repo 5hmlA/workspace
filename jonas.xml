@@ -1,0 +1,95 @@
+<templateSet group="jonas">
+  <template name="onev" value="public void onEvent($END$ event) {&#10;    //TODO&#10;}&#10;" description="onEvent 那个线程发送事件在那个线程处理" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+    </context>
+  </template>
+  <template name="ontouch" value="@Override&#10;public boolean onTouchEvent(MotionEvent event){&#10;    switch(event.getAction()) {&#10;        case MotionEvent.ACTION_DOWN:&#10;            PointF tdown = new PointF(event.getX(), event.getY());&#10;            $cursor$&#10;            break;&#10;        case MotionEvent.ACTION_MOVE:&#10;            PointF tmove = new PointF(event.getX(), event.getY());&#10;            break;&#10;        case MotionEvent.ACTION_UP:&#10;            PointF tup = new PointF(event.getX(), event.getY());&#10;            break;&#10;&#10;    }&#10;    return super.onTouchEvent(event);&#10;}" description="onTouchEvent事件" toReformat="false" toShortenFQNames="true">
+    <variable name="cursor" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="dispat" value="@Override&#10;public boolean dispatchTouchEvent(MotionEvent event){&#10;    &#10;    switch(event.getAction()) {&#10;        case MotionEvent.ACTION_DOWN:&#10;            PointF pdown = new PointF(event.getX(), event.getY());&#10;            $cursor$&#10;            break;            &#10;        case MotionEvent.ACTION_MOVE:&#10;            PointF pmove = new PointF(event.getX(), event.getY());&#10;            break;&#10;        case MotionEvent.ACTION_UP:&#10;            PointF pup = new PointF(event.getX(), event.getY());&#10;            break;&#10;    }&#10;    return super.dispatchTouchEvent(event);&#10;}" description="distatchTouchEvent" toReformat="false" toShortenFQNames="true">
+    <variable name="cursor" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="oninter" value="@Override&#10;public boolean onInterceptTouchEvent(MotionEvent ev){&#10;    switch(ev.getAction()) {&#10;        case MotionEvent.ACTION_DOWN:&#10;            PointF idown = new PointF(ev.getX(), ev.getY());&#10;            break;&#10;        case MotionEvent.ACTION_MOVE:&#10;            PointF imove = new PointF(ev.getX(), ev.getY());&#10;            break;&#10;        case MotionEvent.ACTION_UP:&#10;            PointF iup = new PointF(ev.getX(), ev.getY());&#10;            break;&#10;    }&#10;    return super.onInterceptTouchEvent(ev);&#10;}" description="onInterceptTouchEvent" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="onevmain" value="public void onEventMainThread($cursor$ event) {&#10;    //TODO 在主线程处理事件&#10;}" description="onEventMainThread  for eventbus 在主线程处理事件" toReformat="false" toShortenFQNames="true">
+    <variable name="cursor" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="onevback" value="public void onEventBackground($cursor$ event) {&#10;    //TODO 在子线程中运行，&#10;}" description="onEventBackground for eventbus 子线程运行--如果事件是在UI线程中发布出来的，那么onEventBackground就会在子线程中运行，如果事件本来就是子线程中发布出来的，那么onEventBackground函数直接在该子线程中执行。" toReformat="false" toShortenFQNames="true">
+    <variable name="cursor" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="onevasy" value="public void onEventAsync($end$ event) {&#10;    //TODO 无论事件在哪个线程发布，都会创建新的子线程在执行&#10;}" description="onEventAsync for eventbus  无论事件在哪个线程发布，都会创建新的子线程在执行" toReformat="false" toShortenFQNames="true">
+    <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="click" value="public void $text$(View v){&#10;    &#10;}" description="点击事件" toReformat="false" toShortenFQNames="true">
+    <variable name="text" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="starti" value="Intent intent = new Intent(context, $ACTIVITY$.class);&#10;startActivity(intent);" description="startIntent" toReformat="false" toShortenFQNames="true">
+    <variable name="ACTIVITY" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="ts" value="Toast.makeText($className$.this, &quot;$text$&quot;, 0).show();" description="吐司" toReformat="false" toShortenFQNames="true">
+    <variable name="className" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="text" expression="" defaultValue="" alwaysStopAt="true" />
+  </template>
+  <template name="sout" value="System.out.println($END$);" description="Prints a string to System.out" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="tsf" value="Toast.makeText(getContext().getApplicationContext(), &quot;&quot;, Toast.LENGTH_SHORT).show();" description="吐司 for fragment" toReformat="false" toShortenFQNames="true" />
+  <template name="invi" value="setVisibility(View.INVISIBLE);" description="view 不可见" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="gon" value="setVisibility(android.view.View.GONE);" description="view 设置gone" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="visi" value="setVisibility(View.VISIBLE);" description="view 设置可见" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_CODE" value="true" />
+    </context>
+  </template>
+  <template name="ld" value="if (BuildConfig.DEBUG) Log.d(TAG, &quot;$METHOD_NAME$ $content$&quot;);" description="log打印" toReformat="false" toShortenFQNames="true">
+    <variable name="METHOD_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="content" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="le" value="if (BuildConfig.DEBUG) Log.e(TAG, &quot;$METHOD_NAME$ $content$&quot;);" description="log错误日志" toReformat="false" toShortenFQNames="true">
+    <variable name="METHOD_NAME" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="content" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>
