@@ -53,16 +53,16 @@
       <option name="JAVA_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="ts" value="Toast.makeText($className$.this, &quot;$text$&quot;, 0).show();" description="吐司" toReformat="false" toShortenFQNames="true">
-    <variable name="className" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="text" expression="" defaultValue="" alwaysStopAt="true" />
-  </template>
   <template name="sout" value="System.out.println($END$);" description="Prints a string to System.out" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
-  <template name="tsf" value="Toast.makeText(getContext().getApplicationContext(), &quot;&quot;, Toast.LENGTH_SHORT).show();" description="吐司 for fragment" toReformat="false" toShortenFQNames="true" />
+  <template name="tsf" value="Toast.makeText(getContext().getApplicationContext(), &quot;&quot;, Toast.LENGTH_SHORT).show();" description="吐司 for fragment" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
   <template name="invi" value="setVisibility(View.INVISIBLE);" description="view 不可见" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_CODE" value="true" />
@@ -78,18 +78,62 @@
       <option name="JAVA_CODE" value="true" />
     </context>
   </template>
-  <template name="ld" value="if (BuildConfig.DEBUG) Log.d(TAG, &quot;$METHOD_NAME$ $content$&quot;);" description="log打印" toReformat="false" toShortenFQNames="true">
+  <template name="ld" value="Log.d(TAG, &quot;$METHOD_NAME$ $content$&quot;);" description="log打印" toReformat="false" toShortenFQNames="true">
     <variable name="METHOD_NAME" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="content" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="le" value="if (BuildConfig.DEBUG) Log.e(TAG, &quot;$METHOD_NAME$ $content$&quot;);" description="log错误日志" toReformat="false" toShortenFQNames="true">
+  <template name="le" value="Log.e(TAG, &quot;$METHOD_NAME$ $content$&quot;);" description="log错误日志" toReformat="false" toShortenFQNames="true">
     <variable name="METHOD_NAME" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="content" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="newins" value="public static $fragment$ newInstance($args$) { &#10;    $nullChecks$ &#10;    android.os.Bundle args = new Bundle();&#10;    $addArgs$&#10;    $fragment$ fragment = new $fragment$();&#10;    fragment.setArguments(args);&#10;    return fragment;&#10;}" description="getInstance for fragment" toReformat="true" toShortenFQNames="true">
+    <variable name="fragment" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="args" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="nullChecks" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="addArgs" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="blayout" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&#10;    xmlns:bind=&quot;http://schemas.android.com/apk/res-auto&quot;&#10;    xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;&#10;&#10;    &lt;data&gt;&#10;&#10;        &lt;import type=&quot;android.view.View&quot;/&gt;&#10;    &lt;/data&gt;&#10;&#10;    &lt;android.support.constraint.ConstraintLayout&#10;        android:layout_width=&quot;match_parent&quot;&#10;        android:layout_height=&quot;match_parent&quot;&gt;&#10;&#10;        &#10;    &lt;/android.support.constraint.ConstraintLayout&gt;&#10;&lt;/layout&gt;" description="data binding layout root" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
+  <template name="brecv" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&#10;        xmlns:bind=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;&#10;&#10;    &lt;data&gt;&#10;        &lt;import type=&quot;android.support.v7.widget.LinearLayoutManager&quot;/&gt;&#10;        &lt;import type=&quot;me.tatarka.bindingcollectionadapter2.recv.LayoutManagers&quot;/&gt;&#10;        &lt;import type=&quot;android.view.View&quot;/&gt;&#10;&#10;        &lt;variable&#10;            name=&quot;recvItem&quot;&#10;            type=&quot;Object&quot;/&gt;&#10;    &lt;/data&gt;&#10;&#10;    &lt;android.support.v7.widget.RecyclerView&#10;        android:layout_width=&quot;match_parent&quot;&#10;        android:layout_height=&quot;200dp&quot;&#10;        bind:dataList=&quot;@{recvItem.dataList}&quot;&#10;        bind:itemBinding=&quot;@{recvItem.singleBinding}&quot;&#10;        bind:layoutManager=&quot;@{LayoutManagers.linear(LinearLayoutManager.HORIZONTAL,false)}&quot;/&gt;&#10;&lt;/layout&gt;" description="data binding normol recycleview layout" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
+  <template name="getins" value="public static $fragment$ getInstance($args$) {&#10;    $nullChecks$&#10;    android.os.Bundle args = new Bundle();&#10;    $addArgs$&#10;    $fragment$ fragment = new $fragment$();&#10;    fragment.setArguments(args);&#10;    return fragment;&#10;}" description="create a new Fragment instance with arguments" toReformat="true" toShortenFQNames="true">
+    <variable name="fragment" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <variable name="args" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="nullChecks" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="addArgs" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="sstart" value="public static void startAct(Context activity) {&#10;    Intent intent = new Intent(activity, $fragment$.class);&#10;    $nullChecks$&#10;    $addArgs$&#10;    //intent.putExtra(SEARCH_TYPE, search_type);&#10;    activity.startActivity(intent);&#10;    //ActivityCompat.startActivity(activity, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(activity).toBundle());&#10;}" description="create a new start activity" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <variable name="fragment" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <variable name="nullChecks" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="addArgs" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="vstart" value="public static void startAct4View(View view) {&#10;    Context context = view.getContext();&#10;    while (context instanceof ContextWrapper) {&#10;        if (context instanceof Activity) {&#10;            Activity activity = ((Activity) context);&#10;            Intent intent = new Intent(activity, $activity$.class);&#10;            $addArgs$//intent.putExtra(SEARCH_TYPE, search_type);&#10;            activity.startActivity(intent);&#10;            //ActivityCompat.startActivity(activity, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(activity).toBundle());&#10;        }&#10;        context = ((ContextWrapper) context).getBaseContext();&#10;    }&#10;}" description="start activity from view" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <variable name="activity" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <variable name="addArgs" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="GROOVY_DECLARATION" value="true" />
+      <option name="JAVA_DECLARATION" value="true" />
     </context>
   </template>
 </templateSet>
