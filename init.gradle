@@ -1,0 +1,41 @@
+// 把 init.gradle 放到 ~/.gradle/文件夹下面
+def repoConfig = {
+    all { ArtifactRepository repo ->
+        if (repo instanceof MavenArtifactRepository) {
+            def url = repo.url.toString()
+            if (url.contains('repo1.maven.org/maven2') || url.contains('jcenter.bintray.com')) {
+                println "gradle init: (${repo.name}: ${repo.url}) removed"
+                remove repo
+            }
+        }
+    }
+
+	maven {
+        allowInsecureProtocol = true
+        url 'https://maven.aliyun.com/repository/central'
+    }
+    maven {
+        allowInsecureProtocol = true
+        url 'https://maven.aliyun.com/repository/jcenter'
+    }
+    maven {
+        allowInsecureProtocol = true
+        url 'https://maven.aliyun.com/repository/google'
+    }
+    maven {
+        allowInsecureProtocol = true
+        url 'https://maven.aliyun.com/repository/gradle-plugin'
+    }
+    maven {
+        allowInsecureProtocol = true
+        url 'https://maven.aliyun.com/repository/public'
+    }
+}
+
+allprojects {
+    buildscript {
+        repositories repoConfig
+    }
+
+    repositories repoConfig
+}
